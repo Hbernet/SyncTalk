@@ -93,7 +93,8 @@ Please place the [May.zip](https://drive.google.com/file/d/18Q2H612CAReFxBd9kxr-
     python convert_BFM.py
   ```
 - Put your video under `data/<ID>/<ID>.mp4`, and then run the following command to process the video.
-
+  
+  **[Note]** The video must be 25FPS, with all frames containing the talking person. The resolution should be about 512x512, and duration about 4-5 min.
   ```bash
   python data_utils/process.py data/<ID>/<ID>.mp4 --asr ave
   ```
@@ -131,6 +132,17 @@ This is for a single subject; the paper reports the average results for multiple
 python main.py data/May --workspace model/trial_may -O --test --test_train --asr_model ave --portrait --aud ./demo/test.wav
 ```
 Please use files with the “.wav” extension for inference, and the inference results will be saved in “model/trial_may/results/”. If do not use Audio Visual Encoder, replace wav with the npy file path.
+* DeepSpeech
+
+  ```bash
+  python data_utils/deepspeech_features/extract_ds_features.py --input data/<name>.wav # save to data/<name>.npy
+  ```
+* HuBERT
+
+  ```bash
+  # Borrowed from GeneFace. English pre-trained.
+  python data_utils/hubert.py --wav data/<name>.wav # save to data/<name>_hu.npy
+  ```
 ### Train
 ```bash
 # by default, we load data from disk on the fly.
